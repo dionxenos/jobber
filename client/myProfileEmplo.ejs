@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/logo.ico" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" >
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>My Profile</title>
+</head>
+<body class="">
+    <%- include("partials/navEmplo") %>
+
+      <main role="main" class="container paddingY">
+        <div class="container py-4 bg-white shadow-sm">
+            <!-- <h1 class="text-center">My Profile</h1> -->
+            <div class="row">
+              <div class="col-md-4 d-flex justify-content-center">
+                <img src="https://i.pinimg.com/originals/58/51/2e/58512eb4e598b5ea4e2414e3c115bef9.jpg" alt="profile image" class="rounded-circle my-auto border profileImg">
+              </div>
+              <div class="col-md-6 offset-md-1">
+                <div class="row p-2 mt-3">
+                  <div class="col-sm-10 offset-sm-1 border-bottom"><strong><h2 id="h2"></h2></strong></div>
+                  <div><a href="/users/myprofile/edit" class="text-secondary"><i class="far fa-edit"></i></a></div>
+                </div>
+                <div class="row p-2 mb-3">
+                  <div class="col-md-5 col-sm-6 offset-md-1"><strong><i class="fad fa-calendar-plus text-info"></i> Sign-up Date: </strong></div>
+                  <div class="col-md-3 col-sm-6" id="date"></div>
+                </div>
+                <div class="container contactInfo border">
+                  <div class="row p-2">
+                    <div class="col-sm-10 offset-md-1 border-bottom">
+                      <h4 class="mb-1"><i class="fal fa-info-circle text-info"></i></i> Contact Info</h4>
+                    </div>
+                  </div>
+                  <div class="row p-2">
+                      <div class="col-md-5 col-xs-6 offset-md-1"><strong><i class="fas fa-envelope text-info"></i> E-mail: </strong></div>
+                      <div class="col-md-5 col-xs-6" id="mail"></div>
+                  </div>
+                  <div class="row p-2 mb-4">
+                      <div class="col-md-5 col-sm-6 offset-md-1"><strong><i class="fas fa-phone-square-alt text-info"></i> Telephone: </strong></div>
+                      <div class="col-md-5 col-sm-6" id="tel"></div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            
+        </div>
+
+        <div class="container py-4 mt-3 bg-white shadow-sm">
+          <h1 class="text-center">Active Jobs <span class="h5"><a href="e/jobs" class="text-secondary float-right mr-2"><i class="far fa-edit fa-sm"></i></a></span></h1>
+          <hr>
+          <ul class="list-unstyled jobs"></ul>
+        </div>
+
+        <div class="card mt-3 bg-white shadow-sm">
+          <div class="card-header">
+            <h3 class="text-center">Interview Invites
+              <button class="btn btn-outline-secondary float-right" data-toggle="collapse" data-target="#notifications" aria-expanded="false" aria-controls="collapseExample" id="toggle-invites">
+                <i class="fas fa-angle-down notif-arrow"></i>
+              </button>
+            </h3>
+          </div>
+          <div class="collapse" id="notifications">
+            <div class="card-body p-3">
+              <ul class="list-group list-group-flush invites"></ul>
+            </div>
+          </div>
+        </div>
+      </main>
+      
+
+      <%- include("partials/footerEmplo") %>
+      
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/js/emplo/profileEmplo.js"></script>
+    <script src="/js/search.js"></script>
+
+  </body>
+</html>

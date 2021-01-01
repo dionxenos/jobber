@@ -1,0 +1,52 @@
+<!-- NAVBAR START -->
+<nav class="navbar navbar-expand-sm navbar-dark">
+    <div class="container paddingY">
+      <a class="navbar-brand" href="/users/myprofile"><img src="/images/circle.png" class="logo-nav mr-2" alt=""> Jobber</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="mx-auto">
+          <div class="row no-gutters align-items-center">
+            <div class="col">
+                <input class="form-control border-secondary rounded-pill pr-5" type="text" placeholder="Search..." id="example-search-input2">
+                <ul class="list-unstyled position-absolute w-100 rounded bg-white shadow-sm" id="suggestions-box" style="z-index:2;"></ul>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-outline-light text-dark border-0 rounded-pill ml-n5" type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+          </div>        
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-dark rounded-pill dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="https://i.pinimg.com/originals/58/51/2e/58512eb4e598b5ea4e2414e3c115bef9.jpg" alt="" class="rounded-circle smprofileImg"><span class="" id="username"> </span>
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/users/myprofile"><i class="fas fa-home-alt faColor"></i> Dashboard</a>
+            <a class="dropdown-item" href="/users/myprofile/edit"><i class="fas fa-id-badge faColor"></i> My Profile</a>
+            <a class="dropdown-item" href="/users/e/jobs"><i class="far fa-briefcase faColor"></i> My Jobs</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/users/logout"><i class="fas fa-power-off faColor"></i> Sign out</a>
+          </div>
+        </div>          
+      </div>
+      </div>
+    </nav>
+
+    <div class="container paddingY">
+        <ul class="nav nav-tabs nav-fill justify-content-around">
+          <li class="nav-item">
+            <a class="nav-link dashboard-nav" href="/users/myprofile"><i class="fal fa-home-alt fa-lg faHome"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link profile-nav" href="/users/myprofile/edit"><i class="fal fa-user-circle fa-lg faProfile"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link jobs-nav" href="/users/e/jobs"><i class="fal fa-briefcase fa-lg faJobs"></i></a>
+          </li>
+        </ul>
+      </div>
+    <!-- NAVBAR END -->

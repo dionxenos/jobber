@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/logo.ico" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" >
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>My Jobs</title>
+</head>
+<body class="">
+  <%- include("partials/navEmplo") %>
+
+    <main role="main" class="container paddingY">
+      <div class="container bg-white text-center shadow-sm pt-3 mb-4 border border-muted">
+        <h2 id="jobTitle"></h2>
+        <hr>
+        <p class="text-muted">Add or edit requirements for this job.</p>
+      </div>
+
+      <div class="container bg-white shadow-sm pt-3 pb-3 mb-4 border border-muted px-3">
+        <h3 class="text-center">Requirements</h3>
+        <hr>
+        <div class="row">
+            <h4 class="d-inline col-2"><i class="fal fa-chevron-double-right"></i> Skills:</h4>
+            <div class="col-10">
+                <ul class="list-inline jobSkills">
+                    
+                </ul>
+            </div>
+        </div>
+        <form class="col-4 mx-auto" action="">
+            <div class="input-group">
+              <input type="text" class="form-control rounded-pill skillInput" placeholder="Add Skill...">
+              <button type="submit" class="btn bg-transparent addBtn d-none">
+                  <i class="fal fa-plus-circle fa-lg"></i>
+                </button>
+            </div>
+          </form>
+        <hr>
+        <div class="row">
+          <h4 class="d-inline col-3"><i class="fal fa-chevron-double-right"></i> Languages:</h4>
+          <div class="col-9">
+              <ul class="list-group list-group-flush languageList mb-2">
+                  
+              </ul>
+          </div>
+        </div>
+        <form class="langForm" action="">
+          <div class="input-group d-flex justify-content-center">
+            <input type="text" class="form-control rounded-pill langInput col-4 mr-2" placeholder="Add Language...">
+            <input type="text" class="form-control rounded-pill langLevelInput col-2" placeholder="Level...">
+            <button type="submit" class="btn bg-transparent addBtn2">
+              <i class="fal fa-plus-circle fa-lg"></i>
+            </button>
+          </div>
+        </form>
+        <hr>
+        <div class="row">
+          <h4 class="d-inline col-3"><i class="fal fa-chevron-double-right"></i> Education:</h4>
+          <div class="col-9">
+              <ul class="list-group list-group-flush educationList">
+                  
+              </ul>
+          </div>
+        </div>
+        <form class="mb-3 eduForm" action="">
+          <div class="input-group d-flex justify-content-center">
+            <input type="text" class="form-control rounded-pill fieldInput col-5 mr-2" placeholder="Add Education Field...">
+            <input type="text" class="form-control rounded-pill levelInput col-2" placeholder="Degree Level...">
+            <button type="submit" class="btn bg-transparent addBtn2">
+              <i class="fal fa-plus-circle fa-lg"></i>
+            </button>
+          </div>
+        </form>
+      </div>      
+    </main>
+    
+    <%- include("partials/footerEmplo") %>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script src="/js/emplo/jobEdit.js" type="module"></script>
+  <script src="/js/search.js"></script>
+
+</body>
+</html>

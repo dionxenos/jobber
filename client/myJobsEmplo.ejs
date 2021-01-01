@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/logo.ico" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" >
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>My Jobs</title>
+</head>
+<body class="">
+  <%- include("partials/navEmplo") %>
+
+    <main role="main" class="container paddingY">
+      <div class="container text-center shadow-sm pt-3 pb-2 mb-4 border border-muted navColored">
+        <h1>My Jobs</h1>
+        <p class="text-muted">Post new Jobs or edit already existing ones.</p>
+      </div>
+
+      <div class="container text-center shadow-sm bg-white pt-3 pb-3 mb-4">
+        <h3 class="">Add new Job</h3>
+        <hr>
+        <div class="container col-md-6 d-flex justify-content-center py-1">
+          <form class="col-12 jobSubmit" action="">
+            <div class="input-group">
+              <input type="text" class="form-control rounded-pill addJob" placeholder="Job Title...">
+              <button type="submit" class="btn bg-transparent addBtn d-none">
+                  <i class="fal fa-plus-circle fa-lg"></i>
+                </button>
+            </div>
+          </form>
+        </div>
+        <div class="alerts"></div>
+      </div>
+
+      <div class="container text-center shadow-sm bg-white pt-3 pb-3 mb-4 border border-muted">
+        <h1 class="">Active Jobs</h1>
+        <!-- <p class="text-muted">No active jobs yet</p> -->
+        <ul class="list-group list-group-flush jobList">
+
+        </ul>
+      </div>
+    </main>
+    
+
+    <%- include("partials/footerEmplo") %>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script src="/js/emplo/jobs.js" type="module"></script>
+  <script src="/js/search.js"></script>
+
+</body>
+</html>
