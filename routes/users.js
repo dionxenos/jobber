@@ -112,12 +112,22 @@ router.post("/search-user", (req, res) => {
 
 router.get("/user/:id", (req, res) => {
     const { id } = req.params;
-    User.findByPk(id)
-    .then(user => {
-        if(user.rolecode == 'CANDI') res.render("otherCandi", {rolecode: user.rolecode});
-        else if(user.rolecode == 'EMPLO') res.render("otherEmplo", {rolecode: user.rolecode});
-    })
-    .catch(err => console.log(err));
+
+    const token = req.cookies.jwt;
+
+    if(token){
+        jwt.verify(token, "0003d04b8e93ae73189ea88a01b6a0b5", async (err, decodedToken) => {
+            if (err) console.log(err);
+            else {
+                User.findByPk(id)
+                .then(user => {
+                    if(user.rolecode == 'CANDI') res.render("otherCandi", {rolecode: decodedToken.rolecode});
+                    else if(user.rolecode == 'EMPLO') res.render("otherEmplo", {rolecode: decodedToken.rolecode});
+                })
+                .catch(err => console.log(err));
+            }
+        })
+    }
 });
 
 // END OF SEARCH

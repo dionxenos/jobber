@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
-module.exports = new Sequelize('Thesis', 'sakis', 'Dennis1996xns', {
-    host: 'jobber-db.database.windows.net',
+module.exports = new Sequelize('Thesis', 'sakis', 'dennis1996', {
+    host: 'localhost',
     dialect: 'mssql',
     dialectOptions: {
         encrypt: true

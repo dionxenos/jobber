@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/logo.ico" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" >
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>My Profile</title>
+</head>
+<body class="">
+  <%- include("partials/navEmplo") %>
+
+      <main role="main" class="container paddingY">
+        <div class="card bg-white shadow-sm">
+            <div class="card-header text-center job-card-header">
+                <h2 class="job-title"></h2>
+                <p class="text-muted">
+                    Search for candidates that match this job's requirements! 
+                    <span class="float-right faEdit arrow" data-toggle="collapse" data-target=".reqs" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-angle-down fa-lg"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="collapse reqs">
+                <div class="card-body">
+                    <h4 class="skills">Skills </h4>
+                    <ul class="list-inline pb-2" id="skills"></ul>
+                    <h4 class="langs border-top">Languages</h4>
+                    <ul class="list pl-0 pb-2" id="languages"></ul>
+                    <h4 class="edu border-top">Education</h4>
+                    <ul class="edu list pl-0 pb-2" id="education"></ul>
+                </div>
+            </div>
+            <div class="card-footer bg-white">
+                <h3 class="text-center"><i class="fal fa-sliders-h"></i> Filters</h3>
+                <hr>
+                <div class="">
+                    <form class="generateList">
+                        <div class="input-group justify-content-between my-1 skillF">
+                            <label for="skillWeight" class="col-3"><i class="fas fa-arrow-to-right"></i> Skill Factor</label>
+                            <input type="range" class="form-control col-6" name="skillRange" min="0" max="2" step="0.1" value="1" id="skillWeight" oninput="this.form.skillInput.value=this.value" />
+                            <input type="number" class="form-control col-1 rounded-pill text-center" name="skillInput" min="0" max="2" step="0.1" value="1" oninput="this.form.skillRange.value=this.value" />
+                        </div>
+                        <div class="input-group justify-content-between my-1 langF">
+                          <label for="skillWeight" class="col-3"><i class="fas fa-arrow-to-right"></i> Language Factor</label>
+                          <input type="range" class="form-control col-6" name="langRange" min="0" max="2" step="0.1" value="1" id="langWeight" oninput="this.form.langInput.value=this.value" />
+                          <input type="number" class="form-control col-1 rounded-pill text-center" name="langInput" min="0" max="2" step="0.1" value="1" oninput="this.form.langRange.value=this.value" />
+                      </div>
+                      <div class="input-group justify-content-between my-1 eduF">
+                        <label for="skillWeight" class="col-3"><i class="fas fa-arrow-to-right"></i> Education Factor</label>
+                        <input type="range" class="form-control col-6" name="eduRange" min="0" max="2" step="0.1" value="1" id="eduWeight" oninput="this.form.eduInput.value=this.value" />
+                        <input type="number" class="form-control col-1 rounded-pill text-center" name="eduInput" min="0" max="2" step="0.1" value="1" oninput="this.form.eduRange.value=this.value" />
+                      </div>
+                      <div class="input-group my-3 d-flex justify-content-between">
+                        <button class="btn btn-primary px-4 rounded-pill ml-3 generate" type="submit">Generate List</button>
+                        <button class="btn btn-warning px-4 rounded-pill text-dark reset" type="button">Reset <i class="fas fa-undo"></i></button>
+                      </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white shadow-sm recruitList mt-2">
+          <div class="text-center loading" >
+            <img src="/images/spinner.gif" alt="loading...">
+          </div>
+          <table class="table candList">
+
+          </table>
+        </div>
+        <div class="user-modals">
+
+        </div>
+      </main>
+      
+      <%- include("partials/footerEmplo") %>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/js/emplo/recruit.js"></script>
+    <script src="/js/search.js"></script>
+
+  </body>
+</html>
