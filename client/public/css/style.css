@@ -72,8 +72,18 @@ nav {
     color: white;
 }
 
+.cvpage-card-header {
+    background-color: #222831;
+    color: white;
+}
+
 .job-card-header {
     background-color: #303841;
+    color: white;
+}
+
+.notif-card-header {
+    background-color: #222831;
     color: white;
 }
 
@@ -140,6 +150,12 @@ nav .dropdown-item:active {
 .skillBadge,.jobSkillBadge {
     /* background-color: #f67280; */
     background-color: #ff5722;
+    font-size: 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+.cvSkillBadge {
+    background-color: #00adb5;
     font-size: 1rem;
     padding: 0.5rem 1rem 0.5rem 1rem;
 }
@@ -356,4 +372,14 @@ section .section-title {
 
 .ul-skills, .ul-langs, .ul-edu {
     list-style-type: none;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+  }
+
+.border-darkblue {
+    border: #00adb5;
+    border-color: #303841;
 }

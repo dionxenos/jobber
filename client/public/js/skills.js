@@ -65,9 +65,12 @@ async function loadAllSkills(currSkills, userid) {
 }
 
 function showSkills(skills, id) {
-    skills.forEach(skill => {
-        showSkill(skill, id);
-    });
+    if(skills.length == 0) {$('#skills').append(`<li class="list-inline-item noSkills"><p class="text-muted">No skills added yet on your CV...</p></li>`);}
+    else {
+        skills.forEach(skill => {
+            showSkill(skill, id);
+        });
+    }
 };
 
 function showSkill(skill, userid) {
@@ -101,6 +104,7 @@ async function addSkill(userid) {
     // $('#inputGroupSelect04').prop('selectedIndex',0);
     // $('#skillSubmitBtn').prop('disabled', true);
     resetSkillSelectList(userid);
+    $('.noSkills').remove();
 };
 
 async function resetSkillSelectList(userid) {

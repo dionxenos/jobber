@@ -124,7 +124,13 @@ body {
   color: rgba(255, 255, 255, .5);
 }
 
-.home-img {
+.home-img{
     width: 10rem;
     height: 10rem;
+}
+
+.about-img {
+    width: 10rem;
+    height: 10rem;
+    filter: invert(1);
 }

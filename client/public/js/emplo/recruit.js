@@ -135,7 +135,7 @@ async function generateList(results, emploId) {
                                     <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body border-bottom">
+                                <div class="modal-body m-2">
                                     <h3 class="text-center"><i class="fad fa-user"></i> ${score.FullName}</h3>
                                     <h4 class="border-bottom">Skills </h4>
                                     <ul class="list-inline userSkills"></ul>
@@ -144,7 +144,7 @@ async function generateList(results, emploId) {
                                     <h4 class="border-bottom">Education </h4>
                                     <ul class="list-unstyled userEdu"></ul>
                                 </div>
-                                <div class="bg-dark text-white">
+                                <div class="job-card-header text-white">
                                     <h3 class="text-center mt-2">Contact</h3>
                                     <p class="text-center text-muted">Invite this user for an interview!</p>
                                     <div class="container col-md-8 col-sm-12 text-center">
@@ -167,18 +167,18 @@ async function generateList(results, emploId) {
             const langInfo = await $.ajax(`/api/userlanguages/${score.Id}`);
             const eduInfo = await $.ajax(`/api/usereducation/${score.Id}`);
             skillInfo.forEach(s => {
-                $(".userSkills").append(`<li class="list-inline-item"><span class="badge badge-info jobSkillBadge rounded-pill px-3 mb-1">${s.name}</span></li>`)
+                $(".userSkills").append(`<li class="list-inline-item"><span class="badge badge-info cvSkillBadge rounded-pill px-3 mb-1">${s.name}</span></li>`)
             });
             langInfo.forEach(l => {
                 $(".userLangs").append(`<li class=" d-flex">
                 <span class="pl-0 col-3 font-weight-bold"><i class="fal fa-comments"></i> ${l.Language.name}</span>
-                <span class="col-3">Level: ${l.LanguageLevelCode}</span>
+                <span class="col-3">Level: <strong>${l.LanguageLevelCode}</strong></span>
             </li>`)
             });
             eduInfo.degrees.forEach(e => {
                 $(".userEdu").append(`<li class=" d-flex">
                 <span class="pl-0 col-6 font-weight-bold"><i class="fal fa-university"></i> ${e.fieldName}</span>
-                <span class="col-6">Degree Level: ${e.level}</span>
+                <span class="col-6">Degree Level: <strong>${e.level}</strong></span>
             </li>`)
             });
             

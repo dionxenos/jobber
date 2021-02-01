@@ -15,16 +15,65 @@ $(async () => {
 
     $("#delete-acc").click(() => {
         deleteAcc(user.id);
-    })
+    });
+
+    $.validator.setDefaults({
+
+        highlight: function(element) {
+            $(element)
+            .closest('.form-control')
+            .addClass("is-invalid");
+        },
+        unhighlight: function(element) {
+            $(element)
+            .closest('.form-control')
+            .removeClass("is-invalid")
+            .addClass("is-valid");
+        }
+    });
+
+    $(".change-password").validate({
+        rules: {
+            password1: {
+                required: true,
+                minlength: 8
+            },
+            password2: {
+                required: true,
+                minlength: 8,
+                equalTo: "#password1"
+            }
+        },
+        submitHandler: function(form,e) {
+            
+        }
+    });
 })
 
 function updateUserInfo(userId) {
-    $.ajax({
-        type: "PUT",
-        url: "/users/myprofile/edit",
-        data: {fullname: $('#fullname').val(), email: $('#email').val(), tel: $('#tel').val(), id: userId},
-        success: function() {
-            location.assign("/users/myprofile/edit");
+    $(".user-info").validate({
+        rules: {
+            fullname: "required",
+            email: {
+                required: true,
+                email: true
+            },
+            tel: {
+                required: true,
+                maxlength: 12,
+                digits: true
+            }
+        },
+        submitHandler: function(form,e) {
+            e.preventDefault()
+            $.ajax({
+                type: "PUT",
+                url: "/users/myprofile/edit",
+                data: {fullname: $('#fullname').val(), email: $('#email').val(), tel: $('#tel').val(), id: userId},
+                success: function() {
+                    location.assign("/users/myprofile/edit");
+                }
+            })
         }
     })
 }

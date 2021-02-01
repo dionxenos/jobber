@@ -14,58 +14,92 @@
 	<%- include("partials/navCandi") %>
       
 	<main role="main" class="container paddingY">
-	  <div class="container py-4 mb-2 bg-white shadow-sm">
-		  <h2 class="text-center">My Profile</h2>
-		  <hr class="mx-md-4">
-		  <form class="image-edit mb-2">
+	  <div class="container py-2 mb-2">
+		  <!-- <h2 class="text-center">My Profile</h2>
+		  <hr class="mx-md-4"> -->
+		  <!-- <form class="image-edit mb-2">
 			  <div class="row py-4">
 				  <div class="mx-auto editImg">
-					  <img src="https://i.pinimg.com/originals/58/51/2e/58512eb4e598b5ea4e2414e3c115bef9.jpg" alt="profile image" class="rounded-circle m-auto border profileImg">
+					  <img src="\images\candidate.png" alt="profile image" class="rounded-circle m-auto border profileImg">
 				  </div>
 			  </div>
-		  </form>
-
-		  <form class="user-info mb-2 mx-md-5">
-			  <div class="form-row">
-				  <div class="form-group col-md-6">
-					  <label for="fullname"><h4>Username</h4></label>
-					<input type="text" class="form-control rounded-pill" id="fullname" placeholder="" autocomplete="off">
-				  </div>
+		  </form> -->
+		  	<div class="card border border-dark mx-4 mb-3">
+				<div class="card-header job-card-header">
+					<h4>Edit Profile</h4>
 				</div>
-				<div class="form-row">
-				  <div class="form-group col-md-6">
-					<label for="email"><h5>Email</h5></label>
-					<input type="email" class="form-control rounded-pill" id="email" placeholder="Email">
-				  </div>
-				  <div class="form-group col-md-6">
-					<label for="tel"><h5>Telephone</h5></label>
-					<input type="text" class="form-control rounded-pill" id="tel" placeholder="Telephone">
-				  </div>
+				<div class="card-body">
+					<form class="user-info p-3">
+						<div class="form-group row d-flex justify-content-center">
+							<label for="fullname" class="col-sm-2 col-form-label"><h5><i class="fal fa-user-alt"></i> Username</h5></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control rounded-pill" name="fullname" id="fullname" placeholder="Username" autocomplete="off">
+							</div>  
+						</div>
+						<div class="form-group row d-flex justify-content-center">
+							<label for="email" class="col-sm-2 col-form-label"><h5><i class="fal fa-envelope"></i> Email</h5></label>
+							<div class="col-sm-4">
+								<input type="email" class="form-control rounded-pill" disabled name="email" id="email" placeholder="Email">
+							</div>
+						</div>
+						<div class="form-group row d-flex justify-content-center">
+							<label for="tel" class="col-sm-2 col-form-label"><h5><i class="fal fa-phone-square-alt"></i> Telephone</h5></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control rounded-pill" name="tel" id="tel" placeholder="Telephone">
+							</div>
+						</div>
+						<div class="form-group d-flex justify-content-center">
+							<button class="btn btn-primary px-4 mr-5 rounded-pill" type="button" data-toggle="modal" data-target="#modal1" id="edit-acc"><i class="fal fa-user-edit"></i> Save Changes</button>
+							<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Edit User Information</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									</div>
+									<div class="modal-body">
+										Are you sure you want to edit your account information?
+									</div>
+									<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary" data-dismiss="modal" type="submit" id="save-changes">Save changes</button>
+									</div>
+								</div>
+							  </div>
+							</div>
+							<button class="btn btn-outline-danger px-4 rounded-pill" type="button" data-toggle="modal" data-target="#modal2"><i class="fad fa-trash-alt"></i> Delete Account</button>
+						</div>
+				  </form>
 				</div>
-				<div class="form-row">
-					<button class="btn btn-primary mr-auto px-4 rounded-pill" type="button" data-toggle="modal" data-target="#modal1" id="edit-acc"><i class="fal fa-user-edit"></i> Save Changes</button>
-					<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					  <div class="modal-dialog" role="document">
-					  <div class="modal-content">
-						  <div class="modal-header">
-						  <h5 class="modal-title" id="exampleModalLabel">Edit User Information</h5>
-						  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							  <span aria-hidden="true">&times;</span>
-						  </button>
-						  </div>
-						  <div class="modal-body">
-							  Are you sure you want to edit your account information?
-						  </div>
-						  <div class="modal-footer">
-						  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						  <button type="button" class="btn btn-primary" data-dismiss="modal" type="submit" id="save-changes">Save changes</button>
-						  </div>
-					  </div>
-					  </div>
-					  </div>
-					<button class="btn btn-outline-danger ml-auto px-4 rounded-pill" type="button" data-toggle="modal" data-target="#modal2"><i class="fad fa-trash-alt"></i> Delete Account</button>
+			</div>
+			<!-- PASSWORD FORM -->
+			<div class="card border border-dark mx-4">
+				<div class="card-header job-card-header">
+					<h4>Change Password</h4>
 				</div>
-		  </form>
+				<div class="card-body">
+					<form class="change-password mb-2 p-3">
+						<div class="form-group row d-flex justify-content-center">
+							<label for="password1" class="col-sm-3 col-form-label"><h5>New password</h5></label>
+							<div class="col-sm-4">
+								<input type="password" class="form-control rounded-pill" name="password1" id="password1" placeholder="Password" autocomplete="off">
+							</div>  
+						</div>
+						<div class="form-group row d-flex justify-content-center">
+							<label for="password2" class="col-sm-3 col-form-label"><h5>Repeat password</h5></label>
+							<div class="col-sm-4">
+								<input type="password" class="form-control rounded-pill" name="password2" id="password2" placeholder="Password" autocomplete="off">
+							</div>  
+						</div>
+						<div class="form-group d-flex justify-content-center">
+							<button class="btn btn-primary px-4 rounded-pill" type="submit" id="edit-password"><i class="fal fa-lock-alt"></i> Save Password</button>
+						</div>
+				  </form>
+				</div>
+			</div>
+		  
 	  </div>
 
 	</main>
@@ -97,7 +131,9 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
 	<script src="/js/infoCandiEdit.js"></script>
 	<script src="/js/search.js"></script>
   </body>

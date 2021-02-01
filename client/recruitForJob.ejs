@@ -33,7 +33,7 @@
                     <ul class="edu list pl-0 pb-2" id="education"></ul>
                 </div>
             </div>
-            <div class="card-footer bg-white">
+            <div class="card-footer bg-white border border-primary">
                 <h3 class="text-center"><i class="fal fa-sliders-h"></i> Filters</h3>
                 <hr>
                 <div class="">
@@ -44,14 +44,19 @@
                             <input type="number" class="form-control col-1 rounded-pill text-center" name="skillInput" min="0" max="2" step="0.1" value="1" oninput="this.form.skillRange.value=this.value" />
                         </div>
                         <div class="input-group justify-content-between my-1 langF">
-                          <label for="skillWeight" class="col-3"><i class="fas fa-arrow-to-right"></i> Language Factor</label>
+                          <label for="langWeight" class="col-3"><i class="fas fa-arrow-to-right"></i> Language Factor</label>
                           <input type="range" class="form-control col-6" name="langRange" min="0" max="2" step="0.1" value="1" id="langWeight" oninput="this.form.langInput.value=this.value" />
                           <input type="number" class="form-control col-1 rounded-pill text-center" name="langInput" min="0" max="2" step="0.1" value="1" oninput="this.form.langRange.value=this.value" />
                       </div>
                       <div class="input-group justify-content-between my-1 eduF">
-                        <label for="skillWeight" class="col-3"><i class="fas fa-arrow-to-right"></i> Education Factor</label>
+                        <label for="eduWeight" class="col-3"><i class="fas fa-arrow-to-right"></i> Education Factor</label>
                         <input type="range" class="form-control col-6" name="eduRange" min="0" max="2" step="0.1" value="1" id="eduWeight" oninput="this.form.eduInput.value=this.value" />
                         <input type="number" class="form-control col-1 rounded-pill text-center" name="eduInput" min="0" max="2" step="0.1" value="1" oninput="this.form.eduRange.value=this.value" />
+                      </div>
+                      <!-- <hr> -->
+                      <div class="input-group my-1">
+                        <label for="numOfResults" class="col-4"><i class="fas fa-hashtag"></i> Amount of Search Results</label>
+                        <input type="number" class="form-control rounded-pill col-1 text-center" value="50" min="10" max="200" step="1" id="numOfResults">
                       </div>
                       <div class="input-group my-3 d-flex justify-content-between">
                         <button class="btn btn-primary px-4 rounded-pill ml-3 generate" type="submit">Generate List</button>

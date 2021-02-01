@@ -55,8 +55,8 @@ app.get("/signup", (req, res) => {
     res.render("signup");
 })
 
-app.get("/test", (req, res) => {
-    res.send("SKRRR");
+app.get("/about", (req, res) => {
+    res.render("about");
 })
 // -----------------------------------------
 

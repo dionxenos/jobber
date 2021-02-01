@@ -27,7 +27,7 @@ $(document).ready(async () => {
         `)
     }
     let invNum = 0;
-    $('.unvNum').val(invNum);
+    $('.invNum').val(invNum);
     invites.forEach(i => {
         if(!i.Has_Accepted) invNum++;
         const status = i.Has_Accepted ? `<span class="text-success"><i class="fal fa-check"></i> Accepted!</span>` : `<button class="btn btn-success rounded-pill" id="accept-${i.Id}"><i class="fal fa-check"></i> Accept</button> <button class="btn btn-danger rounded-pill" id="decline-${i.Id}"><i class="fal fa-times-circle"></i> Decline</button>`;
