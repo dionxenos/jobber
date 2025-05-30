@@ -1,11 +1,12 @@
 const jwt = require("jsonwebtoken");
+require('dotenv').config({path: './.env'});
 
 module.exports = {
     ensureAuthenticated: function(req, res, next) {
         const token = req.cookies.jwt;
         
         if(token) {
-            jwt.verify(token, "0003d04b8e93ae73189ea88a01b6a0b5", (err, decodedToken) => {
+            jwt.verify(token, process.env.JWT_KEY, (err, decodedToken) => {
                 if(err) {
                     console.log(err);
                     res.redirect('/login')
@@ -17,29 +18,12 @@ module.exports = {
             res.redirect('/login');
         }
     },
-
-    // checkUser: function(req, res, next) {
-    //     const token = req.cookies.jwt;
-
-    //     if(token) {
-    //         jwt.verify(token, "0003d04b8e93ae73189ea88a01b6a0b5", (err, decodedToken) => {
-    //             if(err) {
-    //                 console.log(err);
-    //                 res.locals.user = null;
-    //             }
-    //             else {
-    //                 res.locals.user = {};
-    //             }
-    //         })
-    //     }
-    //     else res.locals.user = null;
-    // },
-
+    
     ensureCandidate: function(req, res, next) {
         const token = req.cookies.jwt;
         
         if(token) {
-            jwt.verify(token, "0003d04b8e93ae73189ea88a01b6a0b5", (err, decodedToken) => {
+            jwt.verify(token, process.env.JWT_KEY, (err, decodedToken) => {
                 if(err) {
                     console.log(err);
                     res.redirect('/');
@@ -60,7 +44,7 @@ module.exports = {
         const token = req.cookies.jwt;
         
         if(token) {
-            jwt.verify(token, "0003d04b8e93ae73189ea88a01b6a0b5", (err, decodedToken) => {
+            jwt.verify(token, process.env.JWT_KEY, (err, decodedToken) => {
                 if(err) {
                     console.log(err);
                     res.redirect('/');

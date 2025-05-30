@@ -19,7 +19,7 @@ router.get("/myuser", ensureAuthenticated, (req, res) => {
     const token = req.cookies.jwt;
 
     if(token){
-        jwt.verify(token, "0003d04b8e93ae73189ea88a01b6a0b5", async (err, decodedToken) => {
+        jwt.verify(token, process.env.JWT_KEY, async (err, decodedToken) => {
             if (err) console.log(err);
             else {
                 let user = await User.findByPk(decodedToken.id);
@@ -33,7 +33,7 @@ router.get("/myprofile", ensureAuthenticated, (req, res) => {
     const token = req.cookies.jwt;
 
     if(token){
-        jwt.verify(token, "0003d04b8e93ae73189ea88a01b6a0b5", (err, decodedToken) => {
+        jwt.verify(token, process.env.JWT_KEY, (err, decodedToken) => {
             if (err) console.log(err);
             else {
                 if(decodedToken.rolecode == "CANDI") res.render("myProfileCandi");
@@ -47,7 +47,7 @@ router.get("/myprofile/edit", ensureAuthenticated, (req, res) => {
     const token = req.cookies.jwt;
 
     if(token){
-        jwt.verify(token, "0003d04b8e93ae73189ea88a01b6a0b5", (err, decodedToken) => {
+        jwt.verify(token, process.env.JWT_KEY, (err, decodedToken) => {
             if (err) console.log(err);
             else {
                 if(decodedToken.rolecode == "CANDI") res.render("contactInfoCandiEdit");
@@ -63,7 +63,8 @@ router.put("/myprofile/edit", ensureAuthenticated, (req, res) => {
         fullname,
         email,
         telephone: tel
-    },{where: {Id: id}}).then(e => {
+    },{where: {Id: id},returning: true,
+    plain: true}).then(e => {
         res.send(e);
     })
 });
@@ -116,7 +117,7 @@ router.get("/user/:id", (req, res) => {
     const token = req.cookies.jwt;
 
     if(token){
-        jwt.verify(token, "0003d04b8e93ae73189ea88a01b6a0b5", async (err, decodedToken) => {
+        jwt.verify(token, process.env.JWT_KEY, async (err, decodedToken) => {
             if (err) console.log(err);
             else {
                 User.findByPk(id)

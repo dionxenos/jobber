@@ -124,7 +124,7 @@ async function getRecommendedSkillList(id) {
         for(let i=0; i<5; i++) {
             elem.push($(`<li class="list-inline-item">
                 <span class="badge badge-info rounded-pill skillBadge mr-2" id=${recommendedSkills[i].Id}>
-                    ${recommendedSkills[i].NameB}
+                    ${recommendedSkills[i].Name}
                     <i class="fal fa-plus-circle fa-lg float-right ml-3"></i>
                 </span>
                 </li>`));

@@ -150,9 +150,9 @@ router.get("/getEduScore/:jobId", async (req, res) => {
 });
 
 router.post("/recruit/:jobId", async (req, res) => {
-    const {jobId, skillW, langW, eduW} = req.body;
+    const {jobId, skillW, langW, eduW, numOfResults} = req.body;
     const result = await getTotalScore(jobId, skillW, langW, eduW);
-    res.send(result.slice(0,50));
+    res.send(result.slice(0, numOfResults));
 });
 
 

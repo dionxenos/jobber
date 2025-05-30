@@ -28,7 +28,7 @@ $(async () => {
             $.ajax({
                 type: 'POST',
                 url: `/jobs/recruit/${jobId}`,
-                data: {jobId: jobId, skillW: $('#skillWeight').val(), langW: $('#langWeight').val(), eduW: $('#eduWeight').val()},
+                data: {jobId: jobId, skillW: $('#skillWeight').val(), langW: $('#langWeight').val(), eduW: $('#eduWeight').val(), numOfResults: $('#numOfResults').val()},
                 beforeSend: function() {
                     $(".candList").empty();
                     $(".loading").show();

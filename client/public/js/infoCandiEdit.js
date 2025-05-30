@@ -8,10 +8,37 @@ $(async () => {
     $('#email').val(user.email);
     $('#tel').val(user.telephone);
     
-    $("#save-changes").click(e => {
-        e.preventDefault();
-        updateUserInfo(user.id);
-    });
+    
+         $(".user-info").validate({
+            rules: {
+                fullname: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
+                tel: {
+                    required: true,
+                    maxlength: 12,
+                    digits: true
+                }
+            },
+            submitHandler: function(form,e) {
+                e.preventDefault()
+                $.ajax({
+                    type: "PUT",
+                    url: "/users/myprofile/edit",
+                    data: {fullname: $('#fullname').val(), email: $('#email').val(), tel: $('#tel').val(), id: user.id}
+                }).then(e => {
+                    $('#username').text(' '+e[1].fullname);
+                    $('.updated').html(`<div class="alert alert-success alert-dismissible fade show info-success " role="alert">
+                    User information updated successfully!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>`);
+                })
+            }
+        })
 
     $("#delete-acc").click(() => {
         deleteAcc(user.id);
@@ -45,37 +72,18 @@ $(async () => {
             }
         },
         submitHandler: function(form,e) {
-            
+            $('.updated-password').html(`<div class="alert alert-success alert-dismissible fade show info-success " role="alert">
+            Password updated successfully!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>`)
         }
     });
 })
 
 function updateUserInfo(userId) {
-    $(".user-info").validate({
-        rules: {
-            fullname: "required",
-            email: {
-                required: true,
-                email: true
-            },
-            tel: {
-                required: true,
-                maxlength: 12,
-                digits: true
-            }
-        },
-        submitHandler: function(form,e) {
-            e.preventDefault()
-            $.ajax({
-                type: "PUT",
-                url: "/users/myprofile/edit",
-                data: {fullname: $('#fullname').val(), email: $('#email').val(), tel: $('#tel').val(), id: userId},
-                success: function() {
-                    location.assign("/users/myprofile/edit");
-                }
-            })
-        }
-    })
+    
 }
 
 function deleteAcc(userId) {
