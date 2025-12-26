@@ -1,0 +1,14 @@
+using JobberAPI.DTOs;
+using JobberAPI.Models;
+
+namespace API.Interfaces
+{
+    public interface IUserRepository
+    {
+        Task<IEnumerable<UserDto>> GetUsers();
+        Task<User> GetUser(string email);
+        Task<UserDetailsDto> GetUserById(int id);
+        Task<IEnumerable<SkillDto>> GetUserSkillsAsync(int id);
+        string HashPassword(string password);
+    }
+}
