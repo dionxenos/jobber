@@ -8,8 +8,7 @@ Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.UseSerilog((context, configuration) =>
-    configuration.ReadFrom.Configuration(context.Configuration));
+builder.Host.AddSerilog();
 
 var appSettings = builder.Configuration.Get<AppSettings>() ?? new AppSettings();
 builder.Services.Configure<AppSettings>(builder.Configuration);
