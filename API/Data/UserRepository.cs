@@ -99,5 +99,32 @@ namespace API.Data
 
             return hashedPassword;
         }
+
+        public async Task AddUser(User user)
+        {
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateUser(int id, string fullName, string email, string telephone)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null) return;
+
+            user.FullName = fullName;
+            user.Email = email;
+            user.Telephone = telephone;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> DeleteUser(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null) return false;
+
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

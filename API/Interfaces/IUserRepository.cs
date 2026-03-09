@@ -10,5 +10,8 @@ namespace API.Interfaces
         Task<UserDetailsDto> GetUserById(int id);
         Task<IEnumerable<SkillDto>> GetUserSkillsAsync(int id);
         string HashPassword(string password);
+        Task AddUser(User user);
+        Task UpdateUser(int id, string fullName, string email, string telephone);
+        Task<bool> DeleteUser(int id);
     }
 }

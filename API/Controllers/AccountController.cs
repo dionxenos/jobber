@@ -72,6 +72,42 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Route("register")]
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+        {
+            var existingUser = await _userRepository.GetUser(registerDto.Email);
+            if (existingUser != null)
+                return BadRequest("Email already in use.");
+
+            var hashedPassword = _userRepository.HashPassword(registerDto.Password);
+
+            var user = new User
+            {
+                FullName = registerDto.FullName,
+                RoleCode = registerDto.RoleCode,
+                Email = registerDto.Email,
+                Password = hashedPassword,
+                Telephone = registerDto.Telephone,
+                CreatedOn = DateTime.UtcNow
+            };
+
+            await _userRepository.AddUser(user);
+
+            GenerateToken(user);
+
+            var userDto = _mapper.Map<UserDto>(user);
+            return userDto;
+        }
+
+        [HttpGet]
+        [Route("emailExists")]
+        public async Task<ActionResult<bool>> EmailExists([FromQuery] string email)
+        {
+            var available = await _userRepository.GetUser(email) == null;
+            return Ok(available);
+        }
+
+        [HttpPost]
         [Route("logout")]
         public IActionResult LogOut()
         {
