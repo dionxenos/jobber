@@ -16,7 +16,7 @@ export const fetchUser = createAsyncThunk<UserDetails, number>(
   "users/fetchUser",
   async (data, thunkAPI) => {
     try {
-      const userDetails = await agent.User.details(data);
+      const userDetails = await agent.Users.details(data);
       return userDetails;
     } catch (error: any) {
       return thunkAPI.rejectWithValue({ error: error.data });
@@ -28,7 +28,7 @@ export const fetchRecommendedSkills = createAsyncThunk<Skill[], number>(
   "users/fetchRecommendedSkills",
   async (data, thunkAPI) => {
     try {
-      const skills = await agent.Skills.recommendedSkills(data);
+      const skills = await agent.UserSkills.recommended(data);
       return skills;
     } catch (error: any) {
       return thunkAPI.rejectWithValue({ error: error.data });

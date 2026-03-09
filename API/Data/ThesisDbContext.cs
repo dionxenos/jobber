@@ -184,7 +184,7 @@ public partial class ThesisDbContext : DbContext
 
             entity.Property(e => e.CreatedOn)
                 .HasDefaultValueSql("NOW()")
-                .HasColumnType("timestamp")
+                .HasColumnType("timestamp with time zone")
                 .HasColumnName("createdOn");
             entity.Property(e => e.Title).HasMaxLength(255);
 
@@ -333,7 +333,7 @@ public partial class ThesisDbContext : DbContext
 
             entity.Property(e => e.CreatedOn)
                 .HasDefaultValueSql("NOW()")
-                .HasColumnType("timestamp");
+                .HasColumnType("timestamp with time zone");
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
                 .IsUnicode(false);

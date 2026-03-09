@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { User } from "../../app/models/interfaces";
+import { Register, User } from "../../app/models/interfaces";
 import agent from "../../app/api/agent";
 import { router } from "../../app/routes/Router";
 import { LoginForm } from "../../app/models/schemas";
@@ -18,6 +18,19 @@ export const signInUser = createAsyncThunk<User, LoginForm>(
   async (data, thunkAPI) => {
     try {
       const userDto = await agent.Account.login(data);
+      localStorage.setItem("user", JSON.stringify(userDto));
+      return userDto;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({ error: error.data });
+    }
+  }
+);
+
+export const registerUser = createAsyncThunk<User, Register>(
+  "account/registerUser",
+  async (data, thunkAPI) => {
+    try {
+      const userDto = await agent.Account.register(data);
       localStorage.setItem("user", JSON.stringify(userDto));
       return userDto;
     } catch (error: any) {
@@ -79,14 +92,17 @@ export const accountSlice = createSlice({
       toast.success("You have successfully logged out.");
     });
     builder.addMatcher(
-      isAnyOf(fetchCurrentUser.fulfilled, signInUser.fulfilled),
+      isAnyOf(fetchCurrentUser.fulfilled, signInUser.fulfilled, registerUser.fulfilled),
       (state, action) => {
         state.user = action.payload;
       }
     );
-    builder.addMatcher(isAnyOf(signInUser.rejected), (_state, action) => {
-      throw action.payload;
-    });
+    builder.addMatcher(
+      isAnyOf(signInUser.rejected, registerUser.rejected),
+      (_state, action) => {
+        throw action.payload;
+      }
+    );
   },
 });
 

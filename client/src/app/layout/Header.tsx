@@ -40,8 +40,19 @@ const navStyles = {
   },
 };
 
-const pages = [
+const publicPages = [
   { title: "Home", path: "/" },
+  { title: "About", path: "/about" },
+];
+const candidatePages = [
+  { title: "Home", path: "/" },
+  { title: "My CV", path: "/cv" },
+  { title: "About", path: "/about" },
+];
+const employerPages = [
+  { title: "Home", path: "/" },
+  { title: "My Jobs", path: "/jobs" },
+  { title: "Invites", path: "/invites" },
   { title: "About", path: "/about" },
 ];
 const settings = [
@@ -51,6 +62,12 @@ const settings = [
 
 export default function Header({ darkMode, handleThemeChange }: Props) {
   const { user } = useAppSelector((state) => state.account);
+
+  const pages = !user
+    ? publicPages
+    : user.roleCode.trim() === "CANDI"
+    ? candidatePages
+    : employerPages;
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 

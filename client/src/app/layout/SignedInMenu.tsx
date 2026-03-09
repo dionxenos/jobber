@@ -63,6 +63,14 @@ export default function SignedInMenu({ email }: Props) {
         </MenuItem>
         <MenuItem
           onClick={() => {
+            navigate("/profile/edit");
+            handleClose();
+          }}
+        >
+          Edit Profile
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
             navigate("/account");
             handleClose();
           }}

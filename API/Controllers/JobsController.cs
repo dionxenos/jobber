@@ -48,7 +48,7 @@ namespace JobberAPI.Controllers
             {
                 UserId = dto.UserId,
                 Title = dto.Title,
-                CreatedOn = DateTime.UtcNow
+                CreatedOn = DateTime.Now
             };
 
             _context.Jobs.Add(job);
@@ -76,9 +76,20 @@ namespace JobberAPI.Controllers
         public async Task<ActionResult> GetJobSkills(int jobId)
         {
             var job = await _context.Jobs
-                .Include(j => j.JobSkills)
-                    .ThenInclude(js => js.Skill)
-                .FirstOrDefaultAsync(j => j.Id == jobId);
+                .Where(j => j.Id == jobId)
+                .Select(j => new
+                {
+                    j.Id,
+                    j.Title,
+                    JobSkills = j.JobSkills.Select(js => new
+                    {
+                        js.Id,
+                        js.JobId,
+                        js.SkillId,
+                        Skill = new { js.Skill.Id, js.Skill.Name }
+                    })
+                })
+                .FirstOrDefaultAsync();
 
             if (job == null) return NotFound();
             return Ok(job);

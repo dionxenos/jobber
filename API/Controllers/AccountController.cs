@@ -130,7 +130,7 @@ namespace API.Controllers
                     new Claim(ClaimTypes.Name, user.FullName),
                     new Claim(ClaimTypes.Email, user.Email)
                 }),
-                Expires = DateTime.Now.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -139,7 +139,7 @@ namespace API.Controllers
             HttpContext.Response.Cookies.Append("token", encrypterToken,
                 new CookieOptions
                 {
-                    Expires = DateTime.Now.AddDays(7),
+                    Expires = DateTime.UtcNow.AddDays(7),
                     HttpOnly = true,
                     Secure = true,
                     IsEssential = true,

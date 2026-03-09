@@ -1,4 +1,4 @@
-import { Container, CssBaseline, ThemeProvider } from "@mui/material";
+import { Box, Container, CssBaseline, ThemeProvider } from "@mui/material";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
 import Copyright from "../components/Copyright";
@@ -40,17 +40,21 @@ function App() {
         theme="colored"
         autoClose={1000}
       />
-      {loading ? (
-        <Loader message="Loading..." />
-      ) : (
-        <>
-          <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
-          <Container sx={{ mt: 4 }}>
-            {location.pathname === "/" ? <HomePage /> : <Outlet />}
-          </Container>
-        </>
-      )}
-      <Copyright position="absolute" sx={{ left: 0, bottom: 0, right: 0 }} />
+      <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+        {loading ? (
+          <Loader message="Loading..." />
+        ) : (
+          <>
+            <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
+            <Container sx={{ mt: 4, flex: 1 }}>
+              {location.pathname === "/" ? <HomePage /> : <Outlet />}
+            </Container>
+          </>
+        )}
+        <Box component="footer" sx={{ py: 2 }}>
+          <Copyright />
+        </Box>
+      </Box>
     </ThemeProvider>
   );
 }
