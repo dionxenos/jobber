@@ -1,11 +1,12 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { Login } from "../models/interfaces";
 import { toast } from "react-toastify";
+import config from "../config";
 
 const sleep = async (delay: number = 0) =>
   new Promise((resolve) => setTimeout(resolve, delay));
 
-axios.defaults.baseURL = "http://localhost:5256/api/";
+axios.defaults.baseURL = config.API_BASE_URL;
 axios.defaults.withCredentials = true;
 
 axios.interceptors.response.use(

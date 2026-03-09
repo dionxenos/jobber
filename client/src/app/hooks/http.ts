@@ -1,7 +1,8 @@
 import { useCallback, useState } from "react";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import config from "../config";
 
-axios.defaults.baseURL = "http://localhost:5256/api";
+axios.defaults.baseURL = config.API_BASE_URL;
 
 const errorText = "An error occured while processing the http request";
 
