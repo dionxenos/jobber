@@ -162,7 +162,7 @@ public partial class ThesisDbContext : DbContext
 
             entity.Property(e => e.HasAccepted)
                 .IsRequired()
-                .HasDefaultValueSql("('false')")
+                .HasDefaultValueSql("false")
                 .HasColumnName("Has_accepted");
 
             entity.HasOne(d => d.Cand).WithMany(p => p.InterviewCands)
@@ -183,8 +183,8 @@ public partial class ThesisDbContext : DbContext
             entity.ToTable("Job");
 
             entity.Property(e => e.CreatedOn)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime")
+                .HasDefaultValueSql("NOW()")
+                .HasColumnType("timestamp")
                 .HasColumnName("createdOn");
             entity.Property(e => e.Title).HasMaxLength(255);
 
@@ -332,8 +332,8 @@ public partial class ThesisDbContext : DbContext
             entity.HasIndex(e => e.Email, "UQ_USER_EMAIL").IsUnique();
 
             entity.Property(e => e.CreatedOn)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
+                .HasDefaultValueSql("NOW()")
+                .HasColumnType("timestamp");
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
                 .IsUnicode(false);

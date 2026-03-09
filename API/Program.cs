@@ -1,20 +1,45 @@
 using API.Extensions;
+using API.Middleware;
+using API.Settings;
+using DotNetEnv;
+using Serilog;
+
+Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
+
+var appSettings = builder.Configuration.Get<AppSettings>() ?? new AppSettings();
+builder.Services.Configure<AppSettings>(builder.Configuration);
 
 builder.Services.AddControllers();
-builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddApplicationServices(appSettings);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-app.UseCors(builder => builder
-    .AllowAnyHeader()
-    .AllowAnyMethod()
-    .AllowCredentials()
-    .WithOrigins("http://localhost:3000"));
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseSerilogRequestLogging();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseCors(builder =>
+{
+    builder
+        .WithOrigins(appSettings.Cors.AllowedOrigins)
+        .WithMethods(appSettings.Cors.AllowedMethods)
+        .WithHeaders(appSettings.Cors.AllowedHeaders);
+
+    if (appSettings.Cors.AllowCredentials)
+        builder.AllowCredentials();
+});
 
 app.UseHttpsRedirection();
 

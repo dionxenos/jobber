@@ -1,5 +1,6 @@
 using API.Data;
 using API.Interfaces;
+using API.Settings;
 using JobberAPI.Models;
 using JobberAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -12,9 +13,10 @@ namespace API.Extensions
     public static class ApplicationServiceExtensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services,
-            IConfiguration config)
+            AppSettings settings)
         {
-            services.AddDbContext<ThesisDbContext>(options => options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ThesisDbContext>(options =>
+                options.UseNpgsql(settings.ConnectionStrings.DefaultConnection));
             services.AddCors();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddAuthentication(x =>
@@ -31,7 +33,7 @@ namespace API.Extensions
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetValue<string>("Secret"))),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.Secret)),
                     ValidateIssuer = false,
                     ValidateAudience = false,
                 };
@@ -47,6 +49,8 @@ namespace API.Extensions
 
             services.AddScoped<ISkillsRepository, SkillsRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IJobScoringService, JobScoringService>();
+            services.AddScoped<ISkillFrequencyService, SkillFrequencyService>();
 
             return services;
         }

@@ -1,11 +1,13 @@
 using API.DTOs;
 using API.Interfaces;
+using API.Settings;
 using AutoMapper;
 using JobberAPI.Controllers;
 using JobberAPI.DTOs;
 using JobberAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -16,13 +18,13 @@ namespace API.Controllers
     public class AccountController : BaseApiController
     {
         private readonly IUserRepository _userRepository;
-        private readonly IConfiguration _config;
+        private readonly AppSettings _settings;
         private readonly IMapper _mapper;
 
-        public AccountController(IUserRepository userRepository, IConfiguration config, IMapper mapper)
+        public AccountController(IUserRepository userRepository, IOptions<AppSettings> settings, IMapper mapper)
         {
             _userRepository = userRepository;
-            _config = config;
+            _settings = settings.Value;
             _mapper = mapper;
         }
 
@@ -78,10 +80,10 @@ namespace API.Controllers
             return StatusCode(204);
         }
 
-        public dynamic GenerateToken(User user)
+        private dynamic GenerateToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_config.GetValue<string>("Secret"));
+            var key = Encoding.ASCII.GetBytes(_settings.Secret);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
