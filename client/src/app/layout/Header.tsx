@@ -45,15 +45,13 @@ const publicPages = [
   { title: "About", path: "/about" },
 ];
 const candidatePages = [
-  { title: "Home", path: "/" },
   { title: "My CV", path: "/cv" },
-  { title: "About", path: "/about" },
+  { title: "Search", path: "/search" },
 ];
 const employerPages = [
-  { title: "Home", path: "/" },
   { title: "My Jobs", path: "/jobs" },
   { title: "Invites", path: "/invites" },
-  { title: "About", path: "/about" },
+  { title: "Search", path: "/search" },
 ];
 const settings = [
   { title: "Login", path: "/login" },

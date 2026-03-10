@@ -47,6 +47,7 @@ const Account = {
 
 const Users = {
   list: () => requests.get("user"),
+  search: (query: string) => requests.get(`user/search?q=${encodeURIComponent(query)}`),
   details: (id: number) => requests.get(`user/${id}`),
   skills: (id: number) => requests.get(`user/${id}/skills`),
   update: (id: number, body: { fullName: string; email: string; telephone: string }) =>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -27,18 +27,18 @@ export default function JobsPage() {
   const [newTitle, setNewTitle] = useState("");
   const loadedRef = useRef(false);
 
-  const loadJobs = async () => {
+  const loadJobs = useCallback(async () => {
     if (!user) return;
     const data = await agent.Jobs.byUserId(user.id);
     setJobs(data);
-  };
+  }, [user]);
 
   useEffect(() => {
     if (user && !loadedRef.current) {
       loadedRef.current = true;
       loadJobs();
     }
-  }, [user]);
+  }, [user, loadJobs]);
 
   const addJob = async () => {
     if (!user || !newTitle.trim()) return;

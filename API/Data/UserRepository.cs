@@ -79,6 +79,16 @@ namespace API.Data
             return users.Select(user => _mapper.Map<UserDto>(user));
         }
 
+        public async Task<IEnumerable<UserDto>> SearchUsers(string query)
+        {
+            var lowerQuery = query.ToLower();
+            var users = await _context.Users
+                .Where(u => u.FullName.ToLower().Contains(lowerQuery) || u.Email.ToLower().Contains(lowerQuery))
+                .ToListAsync();
+
+            return users.Select(user => _mapper.Map<UserDto>(user));
+        }
+
         public async Task<IEnumerable<SkillDto>> GetUserSkillsAsync(int id)
         {
             var userSkills = await (from candSkill in _context.CandidateSkills

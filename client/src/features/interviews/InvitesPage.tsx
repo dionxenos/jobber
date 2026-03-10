@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -24,20 +24,20 @@ export default function InvitesPage() {
   const isCandidate = user?.roleCode.trim() === "CANDI";
   const loadedRef = useRef(false);
 
-  const loadInvites = async () => {
+  const loadInvites = useCallback(async () => {
     if (!user) return;
     const data = isCandidate
       ? await agent.Interviews.candidateInvites(user.id)
       : await agent.Interviews.employerInvites(user.id);
     setInvites(data);
-  };
+  }, [user, isCandidate]);
 
   useEffect(() => {
     if (user && !loadedRef.current) {
       loadedRef.current = true;
       loadInvites();
     }
-  }, [user]);
+  }, [user, loadInvites]);
 
   const accept = async (id: number) => {
     await agent.Interviews.accept(id);
