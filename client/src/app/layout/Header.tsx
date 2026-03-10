@@ -46,10 +46,12 @@ const publicPages = [
 ];
 const candidatePages = [
   { title: "My CV", path: "/cv" },
+  { title: "Search", path: "/search" },
 ];
 const employerPages = [
   { title: "My Jobs", path: "/jobs" },
   { title: "Invites", path: "/invites" },
+  { title: "Search", path: "/search" },
 ];
 const settings = [
   { title: "Login", path: "/login" },

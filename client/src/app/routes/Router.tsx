@@ -13,6 +13,7 @@ import JobsPage from "../../features/jobs/JobsPage";
 import JobEditPage from "../../features/jobs/JobEditPage";
 import RecruitPage from "../../features/jobs/RecruitPage";
 import InvitesPage from "../../features/interviews/InvitesPage";
+import SearchPage from "../../features/search/SearchPage";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
           { path: "/jobs/:id/recruit", element: <RecruitPage /> },
           { path: "/invites", element: <InvitesPage /> },
           { path: "/users/:id", element: <User /> },
+          { path: "/search", element: <SearchPage /> },
         ],
       },
       { index: true, element: <Home /> },

@@ -27,6 +27,15 @@ namespace JobberAPI.Controllers
         }
 
         [HttpGet]
+        [Route("search")]
+        public async Task<ActionResult<IEnumerable<UserDto>>> SearchUsers([FromQuery] string q)
+        {
+            if (string.IsNullOrWhiteSpace(q)) return Ok(Array.Empty<UserDto>());
+            var users = await _userRepository.SearchUsers(q);
+            return Ok(users);
+        }
+
+        [HttpGet]
         [Route("{userId}")]
         public async Task<ActionResult<UserDetailsDto>> GetUser(int userId)
         {
