@@ -62,7 +62,7 @@ jobs:
         run: railway up --detach
         working-directory: ./API
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_API_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
   # ──────────────────────────────────────────
   # JOB 3: Build React Frontend
