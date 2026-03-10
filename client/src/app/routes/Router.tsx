@@ -4,7 +4,6 @@ import Login from "../../features/account/LoginPage";
 import RegisterPage from "../../features/account/RegisterPage";
 import App from "../layout/App";
 import ErrorPage from "../error/Error";
-import AccountPage from "../../features/account/AccountPage";
 import ProfileEditPage from "../../features/account/ProfileEditPage";
 import About from "../../features/about/About";
 import RequireAuth from "./RequireAuth";
@@ -24,7 +23,6 @@ export const router = createBrowserRouter([
       {
         element: <RequireAuth />,
         children: [
-          { path: "/account", element: <AccountPage /> },
           { path: "/profile/edit", element: <ProfileEditPage /> },
           { path: "/cv", element: <CvPage /> },
           { path: "/jobs", element: <JobsPage /> },

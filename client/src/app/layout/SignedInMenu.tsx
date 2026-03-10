@@ -71,14 +71,6 @@ export default function SignedInMenu({ email }: Props) {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            navigate("/account");
-            handleClose();
-          }}
-        >
-          My account
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
             dispatch(logOutUser());
             handleClose();
           }}

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Autocomplete,
   Box,
@@ -57,7 +57,7 @@ export default function CvPage() {
   const userId = user?.id;
   const loadedRef = useRef(false);
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     if (!userId) return;
     const [skills, uSkills, rec, langs, lLevels, uLangs, eFields, eLevels, uEdu] =
       await Promise.all([
@@ -80,14 +80,14 @@ export default function CvPage() {
     setEduFields(eFields);
     setEduLevels(eLevels);
     setUserEducation(uEdu.degrees ? uEdu : null);
-  };
+  }, [userId]);
 
   useEffect(() => {
     if (userId && !loadedRef.current) {
       loadedRef.current = true;
       loadData();
     }
-  }, [userId]);
+  }, [userId, loadData]);
 
   const addSkill = async (skillId: number) => {
     if (!userId) return;
