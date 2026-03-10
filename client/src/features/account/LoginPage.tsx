@@ -31,7 +31,7 @@ export default function LoginPage() {
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     try {
       await dispatch(signInUser(data));
-      navigate("/account");
+      navigate("/profile/edit");
     } catch (error: any) {
       console.log(error);
     }
