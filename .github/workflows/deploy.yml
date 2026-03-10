@@ -1,0 +1,166 @@
+name: Deploy
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "API/**"
+      - "client/**"
+  workflow_dispatch: # Manual trigger from GitHub UI
+
+jobs:
+  # ──────────────────────────────────────────
+  # JOB 1: Build & Test .NET Backend
+  # ──────────────────────────────────────────
+  build-backend:
+    name: Build & Test Backend (.NET)
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./API
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.312"
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Run tests
+        run: dotnet test --no-build --configuration Release --verbosity normal
+
+  # ──────────────────────────────────────────
+  # JOB 2: Deploy Backend to Railway
+  # Only deploys when PR is merged OR on manual trigger
+  # ──────────────────────────────────────────
+  deploy-backend:
+    name: Deploy Backend to Railway
+    runs-on: ubuntu-latest
+    needs: build-backend
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy to Railway
+        run: railway up --detach
+        working-directory: ./API
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+  # ──────────────────────────────────────────
+  # JOB 3: Build React Frontend
+  # ──────────────────────────────────────────
+  build-frontend:
+    name: Build Frontend (React)
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./client
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"  # ← change to your Node version
+          cache: "npm"
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          CI: false
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build
+          path: ./client/build
+
+  # ──────────────────────────────────────────
+  # JOB 4: Preview Deploy to Cloudflare Pages (on PR)
+  # Posts a preview URL as a PR comment
+  # ──────────────────────────────────────────
+  preview-frontend:
+    name: Preview Frontend on Cloudflare Pages
+    runs-on: ubuntu-latest
+    needs: build-frontend
+    if: github.event_name == 'pull_request'
+    permissions:
+      pull-requests: write
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-build
+          path: ./dist
+
+      - name: Deploy preview to Cloudflare Pages
+        id: cf-preview
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ./dist --project-name=jobber
+
+      - name: Comment preview URL on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = "${{ steps.cf-preview.outputs.deployment-url }}";
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `**Cloudflare Pages Preview**\n\n🔗 ${url}`
+            });
+
+  # ──────────────────────────────────────────
+  # JOB 5: Production Deploy to Cloudflare Pages
+  # Only on merged PR or manual trigger
+  # ──────────────────────────────────────────
+  deploy-frontend:
+    name: Deploy Frontend to Cloudflare Pages (Production)
+    runs-on: ubuntu-latest
+    needs: build-frontend
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-build
+          path: ./dist
+
+      - name: Deploy to Cloudflare Pages (production)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ./dist --project-name=jobber --branch=master  # ← set your CF Pages project name
