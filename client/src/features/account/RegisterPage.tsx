@@ -36,7 +36,7 @@ export default function RegisterPage() {
 
   const onSubmit: SubmitHandler<RegisterForm> = async (data) => {
     try {
-      await dispatch(
+      const result = await dispatch(
         registerUser({
           fullName: data.fullName,
           email: data.email,
@@ -44,8 +44,8 @@ export default function RegisterPage() {
           telephone: data.telephone,
           roleCode: data.roleCode,
         })
-      );
-      navigate("/account");
+      ).unwrap();
+      navigate(result.roleCode.trim() === "CANDI" ? "/cv" : "/jobs");
     } catch (error: any) {
       console.log(error);
     }
