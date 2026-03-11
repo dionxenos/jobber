@@ -30,8 +30,8 @@ export default function LoginPage() {
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     try {
-      await dispatch(signInUser(data));
-      navigate("/profile/edit");
+      const result = await dispatch(signInUser(data)).unwrap();
+      navigate(result.roleCode.trim() === "CANDI" ? "/cv" : "/jobs");
     } catch (error: any) {
       console.log(error);
     }

@@ -11,11 +11,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import AdbIcon from "@mui/icons-material/Adb";
 import MenuIcon from "@mui/icons-material/Menu";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import BusinessCenterRoundedIcon from "@mui/icons-material/BusinessCenterRounded";
 import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../store/configureStore";
 import SignedInMenu from "./SignedInMenu";
@@ -87,8 +85,11 @@ export default function Header({ darkMode, handleThemeChange }: Props) {
           <Box
             sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
           >
-            <BusinessCenterRoundedIcon
-              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+            <Box
+              component="img"
+              src="/logo.svg"
+              alt="Jobber"
+              sx={{ display: { xs: "none", md: "flex" }, mr: 1, width: 28, height: 28 }}
             />
             <Typography
               variant="h6"
@@ -159,7 +160,12 @@ export default function Header({ darkMode, handleThemeChange }: Props) {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <Box
+            component="img"
+            src="/logo.svg"
+            alt="Jobber"
+            sx={{ display: { xs: "flex", md: "none" }, mr: 1, width: 28, height: 28 }}
+          />
           <Typography
             variant="h5"
             noWrap

@@ -14,8 +14,8 @@ import {
   useTheme,
 } from "@mui/material";
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import BusinessCenterRoundedIcon from "@mui/icons-material/BusinessCenterRounded";
+import { Navigate, NavLink } from "react-router-dom";
+
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import GroupsIcon from "@mui/icons-material/Groups";
 import PsychologyIcon from "@mui/icons-material/Psychology";
@@ -71,6 +71,10 @@ const HomePage = () => {
 
   const isDark = theme.palette.mode === "dark";
 
+  if (user) {
+    return <Navigate to={user.roleCode.trim() === "CANDI" ? "/cv" : "/jobs"} replace />;
+  }
+
   return (
     <Box>
       {/* Hero Section */}
@@ -87,8 +91,11 @@ const HomePage = () => {
             px: 3,
           }}
         >
-          <BusinessCenterRoundedIcon
-            sx={{ fontSize: 64, color: "secondary.main", mb: 2 }}
+          <Box
+            component="img"
+            src="/logo.svg"
+            alt="Jobber"
+            sx={{ width: 80, height: 80, mb: 2, borderRadius: 2 }}
           />
           <Typography
             variant="h2"
@@ -118,55 +125,42 @@ const HomePage = () => {
             Jobber connects candidates and employers through intelligent
             competency-based matching — so the right people find the right jobs.
           </Typography>
-          {!user ? (
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={2}
-              justifyContent="center"
-            >
-              <Button
-                component={NavLink}
-                to="/register"
-                variant="contained"
-                color="secondary"
-                size="large"
-                sx={{ px: 5, py: 1.5, fontWeight: 700, fontSize: "1rem" }}
-              >
-                Get Started
-              </Button>
-              <Button
-                component={NavLink}
-                to="/login"
-                variant="outlined"
-                size="large"
-                sx={{
-                  px: 5,
-                  py: 1.5,
-                  fontWeight: 700,
-                  fontSize: "1rem",
-                  borderColor: "secondary.main",
-                  color: "secondary.main",
-                  "&:hover": {
-                    borderColor: "secondary.dark",
-                    backgroundColor: "rgba(255,87,34,0.08)",
-                  },
-                }}
-              >
-                Sign In
-              </Button>
-            </Stack>
-          ) : (
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+            justifyContent="center"
+          >
             <Button
               component={NavLink}
-              to={user.roleCode.trim() === "CANDI" ? "/cv" : "/jobs"}
+              to="/register"
               variant="contained"
               color="secondary"
               size="large"
               sx={{ px: 5, py: 1.5, fontWeight: 700, fontSize: "1rem" }}
             >
-              Go to Dashboard
+              Get Started
             </Button>
-          )}
+            <Button
+              component={NavLink}
+              to="/login"
+              variant="outlined"
+              size="large"
+              sx={{
+                px: 5,
+                py: 1.5,
+                fontWeight: 700,
+                fontSize: "1rem",
+                borderColor: "secondary.main",
+                color: "secondary.main",
+                "&:hover": {
+                  borderColor: "secondary.dark",
+                  backgroundColor: "rgba(255,87,34,0.08)",
+                },
+              }}
+            >
+              Sign In
+            </Button>
+          </Stack>
         </Box>
       </Fade>
 
@@ -255,17 +249,15 @@ const HomePage = () => {
                   </Stack>
                 ))}
               </Stack>
-              {!user && (
-                <Button
-                  component={NavLink}
-                  to="/register"
-                  variant="text"
-                  color="secondary"
-                  sx={{ mt: 3, fontWeight: 600 }}
-                >
-                  Create Candidate Profile &rarr;
-                </Button>
-              )}
+              <Button
+                component={NavLink}
+                to="/register"
+                variant="text"
+                color="secondary"
+                sx={{ mt: 3, fontWeight: 600 }}
+              >
+                Create Candidate Profile &rarr;
+              </Button>
             </Paper>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -294,17 +286,15 @@ const HomePage = () => {
                   </Stack>
                 ))}
               </Stack>
-              {!user && (
-                <Button
-                  component={NavLink}
-                  to="/register"
-                  variant="text"
-                  color="secondary"
-                  sx={{ mt: 3, fontWeight: 600 }}
-                >
-                  Start Hiring &rarr;
-                </Button>
-              )}
+              <Button
+                component={NavLink}
+                to="/register"
+                variant="text"
+                color="secondary"
+                sx={{ mt: 3, fontWeight: 600 }}
+              >
+                Start Hiring &rarr;
+              </Button>
             </Paper>
           </Grid>
         </Grid>
@@ -359,9 +349,7 @@ const HomePage = () => {
                       backgroundColor: "secondary.main",
                       color: "#fff",
                       fontWeight: 600,
-                      "&:hover": {
-                        backgroundColor: "secondary.dark",
-                      },
+                      cursor: "default",
                     }}
                   />
                 </ListItem>
